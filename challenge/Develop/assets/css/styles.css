@@ -19,7 +19,7 @@ body {
   font-family: sans-serif;
 }
 
-​h1,
+h1,
 h2,
 h3,
 h4,
@@ -28,7 +28,7 @@ h6 {
   font-size: 100%;
 }
 
-​input,
+input,
 select,
 option,
 optgroup,
@@ -40,7 +40,7 @@ code {
   font-family: inherit;
 }
 
-​ol,
+ol,
 ul {
   list-style: none;
 }
@@ -62,6 +62,18 @@ ul {
   --disabled: #aaa;
   --error: #ff0022;
   --circle-color: #ffb100;
+  
+  /* Additional Variables for Dark Mode */
+  --dark-light: #333;
+  --dark-light-accent: #555;
+  --dark-dark: #000;
+  --dark-dark-accent: #111;
+  --dark-dark-accent-action: #222;
+  --dark-action: #8570a5;
+  --dark-action-accent: #563d7c;
+  --dark-disabled: #777;
+  --dark-error: #ff0022;
+  --dark-circle-color: #f8c14c;
 }
 
 * {
@@ -93,19 +105,6 @@ main {
 /*
   Classes
 */
-.dark header,
-.dark footer {
-  background-color: var(--dark);
-  color: var(--light);
-}
-
-
-.dark main {
-  background-color: var(--dark-accent);
-  color: var(--light);
-  border-top: solid .5rem var(--disabled);
-}
-
 .light header,
 .light footer {
   background-color: var(--light);
@@ -115,6 +114,18 @@ main {
 .light main {
   background-color: var(--light-accent);
   color: var(--dark);
+}
+
+.dark header,
+.dark footer {
+  background-color: var(--dark-light);
+  color: var(--light);
+}
+
+.dark main {
+  background-color: var(--dark-dark-accent);
+  color: var(--light);
+  border-top: solid .5rem var(--dark-disabled);
 }
 
 /*
@@ -128,4 +139,9 @@ main {
   border: none;
   cursor: pointer;
   text-shadow: 0px 0px .5rem var(--light-accent);
+}
+
+/* Ensure the toggle button's color changes in dark mode */
+.dark #toggle {
+  color: var(--light);
 }
