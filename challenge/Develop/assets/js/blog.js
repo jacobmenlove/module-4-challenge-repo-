@@ -26,12 +26,17 @@ function renderPosts() {
 toggleButton.addEventListener('click', function() {
   document.body.classList.toggle('dark');
   localStorage.setItem('mode', document.body.classList.contains('dark') ? 'dark' : 'light');
+  document.documentElement.style.setProperty('--circle-color', document.body.classList.contains('dark') ? '#333' : '#fff');
 });
 
 document.addEventListener('DOMContentLoaded', function() {
   if (localStorage.getItem('mode') === 'dark') {
     document.body.classList.add('dark');
+    document.documentElement.style.setProperty('--circle-color', '#333');
+  } else {
+    document.documentElement.style.setProperty('--circle-color', '#fff');
   }
+
   renderPosts();
 });
 
