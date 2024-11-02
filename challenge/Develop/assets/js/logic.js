@@ -1,21 +1,26 @@
-function setMode(mode) {
-  localStorage.setItem('mode', mode);
-  document.body.className = mode; 
-  document.documentElement.style.setProperty('--circle-color', mode === 'dark' ? '#333' : '#fff');
+function readLocalStorage(key) {
+  return JSON.parse(localStorage.getItem(key)) || null;
 }
 
-function getMode() {
-  return localStorage.getItem('mode') || 'light';
+function storeLocalStorage(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+function toggleMode() {
+  const currentMode = document.body.classList.contains('dark') ? 'light' : 'dark';
+  document.body.classList.toggle('dark', currentMode === 'dark');
+  document.documentElement.style.setProperty('--circle-color', currentMode === 'dark' ? '#333' : '#fff');
+  storeLocalStorage('mode', currentMode);
+}
+
+function applyMode() {
+  const savedMode = readLocalStorage('mode') || 'light';
+  document.body.classList.toggle('dark', savedMode === 'dark');
+  document.documentElement.style.setProperty('--circle-color', savedMode === 'dark' ? '#333' : '#fff');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const toggle = document.getElementById('toggle');
-  const currentMode = getMode();
-
-  setMode(currentMode);
-
-  toggle.addEventListener('click', () => {
-      const newMode = document.body.classList.contains('light') ? 'dark' : 'light';
-      setMode(newMode);
-  });
+  const toggleButton = document.getElementById('toggle');
+  applyMode(); /
+  toggleButton.addEventListener('click', toggleMode);
 });

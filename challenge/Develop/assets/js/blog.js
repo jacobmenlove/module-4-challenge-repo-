@@ -1,45 +1,43 @@
-const main = document.querySelector('main');
-const toggleButton = document.getElementById('toggle');
-const backButton = document.getElementById('back');
+const redirectURL = 'index.html';
 
-function renderPosts() {
-  let posts = JSON.parse(localStorage.getItem('posts')) || [];
-
-  if (posts.length === 0) {
-    main.innerHTML = '<p>No Blog posts yet...</p>';
-    return;
-  }
-
-  main.innerHTML = '';
-
-  posts.forEach(post => {
-    const postElement = document.createElement('article');
-    postElement.innerHTML = `
-      <h2>${post.title}</h2>
-      <blockquote>By ${post.username}</blockquote>
-      <p>${post.content}</p>
-    `;
-    main.appendChild(postElement);
-  });
+function readLocalStorage(key) {
+    if (!key || typeof key !== 'string') {
+        console.error("readLocalStorage - No valid key provided!");
+        return [];  
+    const data = JSON.parse(localStorage.getItem(key));
+    console.log(`readLocalStorage - Key: ${key}, Data:`, data);
+    return data || [];
 }
 
-toggleButton.addEventListener('click', function() {
-  document.body.classList.toggle('dark');
-  localStorage.setItem('mode', document.body.classList.contains('dark') ? 'dark' : 'light');
-  document.documentElement.style.setProperty('--circle-color', document.body.classList.contains('dark') ? '#333' : '#fff');
-});
 
-document.addEventListener('DOMContentLoaded', function() {
-  if (localStorage.getItem('mode') === 'dark') {
-    document.body.classList.add('dark');
-    document.documentElement.style.setProperty('--circle-color', '#333');
-  } else {
-    document.documentElement.style.setProperty('--circle-color', '#fff');
-  }
+function renderBlogList() {
+    const main = document.querySelector('main');
+    const posts = readLocalStorage('posts');
 
-  renderPosts();
-});
+    
+    if (!Array.isArray(posts) || posts.length === 0) {
+        main.innerHTML = '<p>No Blog posts yet...</p>';
+    } else {
+        main.innerHTML = ''; // Clear any existing content
+        posts.forEach(post => {
+            const postElement = document.createElement('article');
+            postElement.innerHTML = `
+                <h2>${post.title}</h2>
+                <blockquote>By ${post.username}</blockquote>
+                <p>${post.content}</p>
+            `;
+            main.appendChild(postElement);
+        });
+    }
+}
 
-backButton.addEventListener('click', function() {
-  location.assign('index.html');
+document.addEventListener('DOMContentLoaded', () => {
+    renderBlogList(); 
+
+
+    document.getElementById('back').addEventListener('click', () => {
+        if (redirectURL.includes('index.html')) {
+            location.assign(redirectURL);
+        }
+    });
 });

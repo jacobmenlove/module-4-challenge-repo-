@@ -1,26 +1,53 @@
-const form = document.getElementById('blog-form');
-const error = document.getElementById('error');
+const redirectURL = 'blog.html'; 
 
-form.addEventListener('submit', function (event) {
-  event.preventDefault(); 
+function readLocalStorage(key) {
+    if (!key || typeof key !== 'string') {
+        console.error("readLocalStorage - No valid key provided!", key);
+        return [];  
+    const data = JSON.parse(localStorage.getItem(key));
+    console.log(`readLocalStorage - Key: ${key}, Data:`, data);
+    return data || [];
+}
 
-  const username = document.getElementById('username').value.trim();
-  const title = document.getElementById('title').value.trim();
-  const content = document.getElementById('content').value.trim();
+function storeLocalStorage(key, data) {
+    if (!key || typeof key !== 'string') {
+        console.error("storeLocalStorage - No valid key provided!", key);
+        return;
+    }
+    console.log(`storeLocalStorage - Key: ${key}, Data to Store:`, data);
+    localStorage.setItem(key, JSON.stringify(data));
+}
 
-  if (!username || !title || !content) {
-    error.textContent = 'Please complete the form.';
-    return;
-  }
+document.getElementById('blog-form').addEventListener('submit', function (event) {
+    event.preventDefault();
 
-  error.textContent = '';
+    const username = document.getElementById('username').value.trim();
+    const title = document.getElementById('title').value.trim();
+    const content = document.getElementById('content').value.trim();
+    const error = document.getElementById('error');
 
-  const blogPost = { username, title, content };
+    if (!username || !title || !content) {
+        error.textContent = 'Please complete the form.';
+        return;
+    }
 
-  let posts = JSON.parse(localStorage.getItem('posts')) || [];
-  posts.push(blogPost);
+    error.textContent = '';  
+    const blogPost = { username, title, content };
 
-  localStorage.setItem('posts', JSON.stringify(posts));
+    
+    let posts = readLocalStorage('posts'); 
+    if (!Array.isArray(posts)) {
+        console.error("Error: 'posts' is not an array. Resetting to an empty array.");
+        posts = [];  
+    }
+    posts.push(blogPost);
+    storeLocalStorage('posts', posts); 
 
-  location.assign('blog.html');
+   
+    console.log("Final Stored data array:", JSON.parse(localStorage.getItem('posts')));
+
+    
+    if (redirectURL.includes('blog.html')) {
+        location.assign(redirectURL);
+    }
 });

@@ -1,178 +1,243 @@
-/*
-  Resets
-*/
-*,
-*:before,
-*:after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+body {
+  background-color: #ffffff;
+  color: #000000;
 }
 
-html {
-  height: 100%;
+.dark {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+/* Circle color variable */
+:root {
+  --circle-color: #ffffff;
+}
+
+body.dark {
+  --circle-color: #333333;
+}
+
+form, main {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+button {
+  cursor: pointer;
+}
+
+article {
+  margin-bottom: 20px;
+}
+
+article h2 {
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+blockquote {
+  font-style: italic;
+  margin: 0;
+}
+
+:root {
+  --background-color-light: #f5f5f5;
+  --background-color-dark: #1e1e1e;
+  --text-color-light: #333333;
+  --text-color-dark: #eeeeee;
+  --accent-color: #ff6347; /* Tomato red */
+  --button-color: #ff4500; /* Orangered */
+  --button-hover-color: #ff6347; /* Tomato */
+  --input-bg-light: #ffffff;
+  --input-bg-dark: #2e2e2e;
+  --border-color-light: #dddddd;
+  --border-color-dark: #555555;
+  --circle-color-light: #ff4500;
+  --circle-color-dark: #ffa07a; /* Light salmon for dark mode */
+  font-family: 'Arial', sans-serif;
+  --box-shadow-light: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --box-shadow-dark: 0 4px 8px rgba(255, 255, 255, 0.1);
 }
 
 body {
-  min-height: 100%;
-  line-height: 1;
-  font-family: sans-serif;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-size: 100%;
-}
-
-input,
-select,
-option,
-optgroup,
-textarea,
-button,
-pre,
-code {
-  font-size: 100%;
-  font-family: inherit;
-}
-
-ol,
-ul {
-  list-style: none;
-}
-
-
-.dark header, .dark footer { 
-  background-color: var(--dark); 
-  color: var(--light); 
-}
-
-.dark main { 
-  background-color: var(--dark-accent); 
-  color: var(--light); 
-  border-top: solid .5rem var(--disabled); 
-}
-
-.light header, .light footer { 
-  background-color: var(--light); 
-  color: var(--dark); 
-}
-
-.light main { 
-  background-color: var(--light-accent); 
-  color: var(--dark); 
-}
-
-#toggle { 
-  font-size: 1.52em; 
-  margin: 0; 
-  padding: 0; 
-  background: transparent; 
-  border: none; 
-  cursor: pointer; 
-  text-shadow: 0px 0px .5rem var(--light-accent); 
-}
-/*
-  General Styles
-*/
-/*
-  Universal
-*/
-:root {
-  --light: #fff;
-  --light-accent: #f9f9fb;
-  --dark: #000;
-  --dark-accent: #222;
-  --dark-accent-action: #111;
-  --action: #563d7c;
-  --action-accent: #8570a5;
-  --disabled: #aaa;
-  --error: #ff0022;
-  --circle-color: #ffb100;
-  
-  /* Additional Variables for Dark Mode */
-  --dark-light: #333;
-  --dark-light-accent: #555;
-  --dark-dark: #000;
-  --dark-dark-accent: #111;
-  --dark-dark-accent-action: #222;
-  --dark-action: #8570a5;
-  --dark-action-accent: #563d7c;
-  --dark-disabled: #777;
-  --dark-error: #ff0022;
-  --dark-circle-color: #f8c14c;
-}
-
-* {
-  transition: background-color ease-in .5s;
-}
-
-/*
-  Tags
-*/
-header {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-}
-
-header,
-footer {
-  padding: 2rem;
-}
-
-main {
-  height: calc(100vh - 6rem);
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  border-top: double 1rem;
-}
-
-/*
-  Classes
-*/
-.light header,
-.light footer {
-  background-color: var(--light);
-  color: var(--dark);
-}
-
-.light main {
-  background-color: var(--light-accent);
-  color: var(--dark);
-}
-
-.dark header,
-.dark footer {
-  background-color: var(--dark-light);
-  color: var(--light);
-}
-
-.dark main {
-  background-color: var(--dark-dark-accent);
-  color: var(--light);
-  border-top: solid .5rem var(--dark-disabled);
-}
-
-/*
-  IDs
-*/
-#toggle {
-  font-size: 1.52em;
+  background-color: var(--background-color-light);
+  color: var(--text-color-light);
+  font-family: var(--font-family);
   margin: 0;
   padding: 0;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  text-shadow: 0px 0px .5rem var(--light-accent);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Ensure the toggle button's color changes in dark mode */
-.dark #toggle {
-  color: var(--light);
+.dark {
+  background-color: var(--background-color-dark);
+  color: var(--text-color-dark);
 }
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--accent-color);
+  font-family: 'Georgia', serif;
+  margin-bottom: 0.6em;
+  transition: color 0.3s ease;
+}
+
+p, blockquote {
+  font-size: 1.1em;
+  line-height: 1.6;
+  color: var(--text-color-light);
+  transition: color 0.3s ease;
+}
+
+blockquote {
+  font-style: italic;
+  color: var(--accent-color);
+  margin: 0.5em 0;
+  padding-left: 1em;
+  border-left: 3px solid var(--accent-color);
+}
+
+/* Layout */
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Form Styling */
+form {
+  background-color: var(--input-bg-light);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: var(--box-shadow-light);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+form input[type="text"],
+form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-color-light);
+  border-radius: 4px;
+  background-color: var(--input-bg-light);
+  color: var(--text-color-light);
+  font-size: 1em;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.dark form {
+  background-color: var(--input-bg-dark);
+  box-shadow: var(--box-shadow-dark);
+}
+
+.dark form input[type="text"],
+.dark form textarea {
+  background-color: var(--input-bg-dark);
+  color: var(--text-color-dark);
+  border-color: var(--border-color-dark);
+}
+
+/* Buttons */
+button {
+  padding: 10px 20px;
+  font-size: 1em;
+  color: #ffffff;
+  background-color: var(--button-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  background-color: var(--button-hover-color);
+  transform: translateY(-2px);
+}
+
+.dark button {
+  color: var(--text-color-dark);
+}
+
+/* Light/Dark Toggle Button */
+#toggle {
+  background: none;
+  border: none;
+  color: var(--accent-color);
+  font-size: 1.2em;
+  cursor: pointer;
+  padding: 5px 15px;
+  transition: color 0.3s ease;
+}
+
+#toggle:hover {
+  color: var(--button-hover-color);
+}
+
+/* Blog Post Styling */
+article {
+  background-color: var(--input-bg-light);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: var(--box-shadow-light);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dark article {
+  background-color: var(--input-bg-dark);
+  box-shadow: var(--box-shadow-dark);
+}
+
+/* Links */
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--button-hover-color);
+  text-decoration: underline;
+}
+
+/* Error Messages */
+#error {
+  color: #ff4500;
+  font-size: 0.9em;
+}
+
+/* Circle Color for Dark Mode */
+:root {
+  --circle-color: var(--circle-color-light);
+}
+
+.dark :root {
+  --circle-color: var(--circle-color-dark);
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  main, form, article {
+      padding: 15px;
+  }
+
+  button {
+      padding: 8px 16px;
+      font-size: 0.9em;
+  }
+
+  #toggle {
+      font-size: 1em;
+  }
+}
+:root {
+  --circle-color: #ffffff;
+}
+
+body.dark {
+  --circle-color: #333333;
+}
+
